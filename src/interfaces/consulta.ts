@@ -1,14 +1,13 @@
-import { Medico } from "./medico";
-import { Paciente } from "../types/paciente";
-import { StatusConsulta } from "../types/statusConsulta";
+import type { Medico } from "./medico";
+import type { Paciente } from "../types/paciente";
+import type { StatusConsulta } from "../types/statusConsulta";
 
 export interface Consulta{
     id: number;
     medico: Medico;
     paciente: Paciente;
     data: Date;
-    valor: Number;
+    valor: number;
     status: StatusConsulta;
-    observacoes?: String;
-
+    observacoes?: string;
 }
