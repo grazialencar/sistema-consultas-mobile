@@ -1,8 +1,3 @@
-/**
- * ConsultaCard - Componente Reutilizável
- * 
- * Responsabilidade: Exibir os dados de UMA consulta
- */
 
 import React from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
@@ -55,7 +50,7 @@ export default function ConsultaCard({
             </View>
             </View>
             <View style={styles.secao}>
-                <Text style={styles.label}>👤 Paciente</Text>
+                <Text style={styles.label}>Paciente</Text>
                 <Text style={styles.valor}>{consulta.paciente.nome}</Text>
                 <Text style={styles.info}>CPF: {consulta.paciente.cpf}</Text>
                 <Text style={styles.info}>Email: {consulta.paciente.email}</Text>
@@ -63,8 +58,8 @@ export default function ConsultaCard({
                     <Text style={styles.info}>Tel: {consulta.paciente.telefone}</Text>
                 )}
             </View>
-            <View style={styles.secao}>
-                <Text style={styles.label}>📅 Dados da Consulta</Text>
+            <View style={styles.secaoConsulta}>
+                <Text style={styles.label}>Dados da Consulta</Text>
                 <Text style={styles.valor}>Data: {formatarData(consulta.data)}</Text>
                 <Text style={styles.valor}>
                     Valor: {formatarValor(consulta.valor)}
@@ -159,12 +154,20 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#e0e0e0",
   },
+  secaoConsulta: {
+    backgroundColor: "#0b81853a",
+    marginBottom: 15,
+    borderRadius: 8,
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#e0e0e0",
+  },
   
   label: {
-    fontSize: 16,
+    fontSize: 18,
+    color: "#333",
+    marginBottom: 4,
     fontWeight: "bold",
-    color: "#000",
-    marginBottom: 8,
   },
   
   // Valores exibidos (nome do médico, nome do paciente, etc)
