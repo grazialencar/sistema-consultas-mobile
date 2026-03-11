@@ -41,19 +41,12 @@ export default function App() {
     id: 1,
     medico: medico1,
     paciente: paciente1,
-    data: new Date(2026, 2, 10), // 10/03/2026
+    data: new Date(2026, 2, 10),
     valor: 350,
     status: "agendada",
     observacoes: "Consulta de rotina",
   });
 
-  /**
-   * Funções para manipular a consulta
-   * 
-   * Essas funções serão passadas como props para o componente.
-   * O componente não altera o estado diretamente - ele apenas
-   * "comunica" ao pai (App) que uma ação foi solicitada.
-   */
   function confirmarConsulta() {
     setConsulta({
       ...consulta,
@@ -79,18 +72,7 @@ export default function App() {
           <Text style={styles.subtitulo}>Consulta #{consulta.id}</Text>
         </View>
 
-        {/* 
-          Componente ConsultaCard
-          
-          Veja como ficou mais simples!
-          Antes: ~100 linhas de JSX no App.tsx
-          Agora: 1 componente reutilizável
-          
-          Props:
-          - consulta: objeto com todos os dados
-          - onConfirmar: função a ser chamada ao confirmar
-          - onCancelar: função a ser chamada ao cancelar
-        */}
+  
         <ConsultaCard
           consulta={consulta}
           onConfirmar={confirmarConsulta}
@@ -102,17 +84,7 @@ export default function App() {
   );
 }
 
-/**
- * Estilos do App
- * 
- * Note que removemos TODOS os estilos do card!
- * Eles agora estão encapsulados no componente ConsultaCard.
- * 
- * App.tsx agora só tem estilos de layout geral:
- * - Container principal
- * - Cabeçalho
- * - Rodapé
- */
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
