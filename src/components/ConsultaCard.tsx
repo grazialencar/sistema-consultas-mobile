@@ -117,15 +117,13 @@ export default function ConsultaCard({
 const styles = StyleSheet.create({
   // Container principal do card
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
     borderRadius: 16,
     padding: 20,
-    // Sombra no iOS
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 8,
-    // Sombra no Android
     elevation: 5,
   },
   
