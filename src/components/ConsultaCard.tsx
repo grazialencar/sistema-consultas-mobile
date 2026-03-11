@@ -48,10 +48,11 @@ export default function ConsultaCard({
                 </Text>
             </View>
             <View style={styles.secao}>
-                <Text style={styles.label}>👨‍⚕️ Médico</Text>
-                <Text style={styles.valor}>{consulta.medico.nome}</Text>
-                <Text style={styles.info}>CRM: {consulta.medico.crm}</Text>
-                <Text style={styles.info}>{consulta.medico.especialidade.nome}</Text>
+                <Text style={styles.nomeMedico}>{consulta.medico.nome}</Text>
+            <View style={styles.infoContainer}>
+              <Text style={styles.info}>{consulta.medico.especialidade.nome}</Text>
+              <Text style={styles.info}> {consulta.medico.crm}</Text>
+            </View>
             </View>
             <View style={styles.secao}>
                 <Text style={styles.label}>👤 Paciente</Text>
@@ -89,7 +90,7 @@ export default function ConsultaCard({
                                 <Button
                                     title="Cancelar Consulta"
                                     onPress={onCancelar}
-                                    color="#F44336"
+                                    color="#c52014"
                                 />
                             </View>
                         )}
@@ -126,21 +127,24 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 5,
   },
-  
-  // Badge de status (agendada, confirmada, cancelada)
+  infoContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+     gap: 8,
+  },
   statusBadge: {
-    backgroundColor: "#FFA500", // Laranja (padrão para "agendada")
+    backgroundColor: "#0b8185",
     alignSelf: "flex-start",
     paddingHorizontal: 16,
     paddingVertical: 8,
-    borderRadius: 20,
+    borderRadius: 10,
     marginBottom: 20,
   },
   statusConfirmada: {
-    backgroundColor: "#4CAF50", // Verde
+    backgroundColor: "#4CAF50",
   },
   statusCancelada: {
-    backgroundColor: "#F44336", // Vermelho
+    backgroundColor: "#983028",
   },
   statusTexto: {
     color: "#fff",
@@ -156,11 +160,10 @@ const styles = StyleSheet.create({
     borderBottomColor: "#e0e0e0",
   },
   
-  // Labels das seções (👨‍⚕️ Médico, 👤 Paciente, etc)
   label: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#79059C",
+    color: "#000",
     marginBottom: 8,
   },
   
@@ -170,8 +173,13 @@ const styles = StyleSheet.create({
     color: "#333",
     marginBottom: 4,
   },
+  nomeMedico: {
+    fontSize: 18,
+    color: "#333",
+    marginBottom: 4,
+    fontWeight: "bold",
+  },
   
-  // Informações complementares (CRM, CPF, email, etc)
   info: {
     fontSize: 14,
     color: "#666",
@@ -202,7 +210,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     borderLeftWidth: 4,
-    borderLeftColor: "#4CAF50",
+    borderLeftColor: "#216523",
   },
   
   // Mensagem de cancelamento (vermelho)
@@ -211,7 +219,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     borderLeftWidth: 4,
-    borderLeftColor: "#F44336",
+    borderLeftColor: "#802620",
   },
   mensagemTexto: {
     fontSize: 16,
