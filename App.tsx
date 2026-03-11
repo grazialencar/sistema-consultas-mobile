@@ -116,7 +116,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#79059C",
+    backgroundColor: "#eeeeee",
   },
   scrollContent: {
     padding: 20,
@@ -127,15 +127,18 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   titulo: {
-    fontSize: 28,
+    fontSize: 22,
     fontWeight: "bold",
-    color: "#fff",
+    color: "#2b2828",
     marginBottom: 8,
+    textAlign: "center"
   },
   subtitulo: {
     fontSize: 18,
-    color: "#fff",
+    color: "#0b8185",
     opacity: 0.9,
+    textAlign: "center",
+    marginBottom: 16,
   },
   rodape: {
     marginTop: 24,
