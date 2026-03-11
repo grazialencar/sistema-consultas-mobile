@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 20,
-    paddingTop: 60,
+    paddingTop: 40,
   },
   header: {
     alignItems: "center",
@@ -151,6 +151,5 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     lineHeight: 18,
-    marginBottom: 4,
   },
 });
