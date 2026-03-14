@@ -1,7 +1,7 @@
-
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
-import { Consulta } from "../interfaces/consulta"; // ← import do type GLOBAL
+import { View, Text, Button } from "react-native";
+import { Consulta } from "../interfaces/consulta";
+import { styles } from "../styles/consultaCard.styles";
 
 // Type LOCAL (usado apenas aqui)
 type ConsultaCardProps = {
@@ -42,32 +42,49 @@ export default function ConsultaCard({
                     {consulta.status.toUpperCase()}
                 </Text>
             </View>
+
             <View style={styles.secao}>
                 <Text style={styles.nomeMedico}>{consulta.medico.nome}</Text>
-            <View style={styles.infoContainer}>
-              <Text style={styles.info}>{consulta.medico.especialidade.nome}</Text>
-              <Text style={styles.info}> {consulta.medico.crm}</Text>
+
+                <View style={styles.infoContainer}>
+                    <Text style={styles.info}>
+                        {consulta.medico.especialidade.nome}
+                    </Text>
+                    <Text style={styles.info}>
+                        {consulta.medico.crm}
+                    </Text>
+                </View>
             </View>
-            </View>
+
             <View style={styles.secao}>
                 <Text style={styles.label}>Paciente</Text>
                 <Text style={styles.valor}>{consulta.paciente.nome}</Text>
                 <Text style={styles.info}>CPF: {consulta.paciente.cpf}</Text>
                 <Text style={styles.info}>Email: {consulta.paciente.email}</Text>
+
                 {consulta.paciente.telefone && (
-                    <Text style={styles.info}>Tel: {consulta.paciente.telefone}</Text>
+                    <Text style={styles.info}>
+                        Tel: {consulta.paciente.telefone}
+                    </Text>
                 )}
             </View>
+
             <View style={styles.secaoConsulta}>
                 <Text style={styles.label}>Dados da Consulta</Text>
-                <Text style={styles.valor}>Data: {formatarData(consulta.data)}</Text>
+                <Text style={styles.valor}>
+                    Data: {formatarData(consulta.data)}
+                </Text>
                 <Text style={styles.valor}>
                     Valor: {formatarValor(consulta.valor)}
                 </Text>
+
                 {consulta.observacoes && (
-                    <Text style={styles.observacoes}>{consulta.observacoes}</Text>
+                    <Text style={styles.observacoes}>
+                        {consulta.observacoes}
+                    </Text>
                 )}
             </View>
+
             <View style={styles.acoes}>
                 {consulta.status === "agendada" && (
                     <>
@@ -80,6 +97,7 @@ export default function ConsultaCard({
                                 />
                             </View>
                         )}
+
                         {onCancelar && (
                             <View style={styles.botaoContainer}>
                                 <Button
@@ -91,6 +109,7 @@ export default function ConsultaCard({
                         )}
                     </>
                 )}
+
                 {consulta.status === "confirmada" && (
                     <View style={styles.mensagem}>
                         <Text style={styles.mensagemTexto}>
@@ -101,133 +120,12 @@ export default function ConsultaCard({
 
                 {consulta.status === "cancelada" && (
                     <View style={styles.mensagemCancelada}>
-                        <Text style={styles.mensagemTexto}>✗ Consulta cancelada</Text>
+                        <Text style={styles.mensagemTexto}>
+                            ✗ Consulta cancelada
+                        </Text>
                     </View>
                 )}
             </View>
         </View>
     );
 }
-
-// Estilos LOCAIS (encapsulados no componente)
-const styles = StyleSheet.create({
-  // Container principal do card
-  card: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: 16,
-    padding: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
-    elevation: 5,
-  },
-  infoContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-     gap: 8,
-  },
-  statusBadge: {
-    backgroundColor: "#0b8185",
-    alignSelf: "flex-start",
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 10,
-    marginBottom: 20,
-  },
-  statusConfirmada: {
-    backgroundColor: "#4CAF50",
-  },
-  statusCancelada: {
-    backgroundColor: "#983028",
-  },
-  statusTexto: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 12,
-  },
-  
-  // Seções do card (médico, paciente, dados)
-  secao: {
-    marginBottom: 20,
-    paddingBottom: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: "#e0e0e0",
-  },
-  secaoConsulta: {
-    backgroundColor: "#0b81853a",
-    marginBottom: 15,
-    borderRadius: 8,
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: "#e0e0e0",
-  },
-  
-  label: {
-    fontSize: 18,
-    color: "#333",
-    marginBottom: 4,
-    fontWeight: "bold",
-  },
-  
-  // Valores exibidos (nome do médico, nome do paciente, etc)
-  valor: {
-    fontSize: 18,
-    color: "#333",
-    marginBottom: 4,
-  },
-  nomeMedico: {
-    fontSize: 18,
-    color: "#333",
-    marginBottom: 4,
-    fontWeight: "bold",
-  },
-  
-  info: {
-    fontSize: 14,
-    color: "#666",
-    marginBottom: 2,
-  },
-  
-  // Observações (texto em itálico)
-  observacoes: {
-    fontSize: 14,
-    color: "#555",
-    fontStyle: "italic",
-    marginTop: 8,
-  },
-  
-  // Container das ações (botões e mensagens)
-  acoes: {
-    marginTop: 10,
-  },
-  
-  // Espaçamento entre botões
-  botaoContainer: {
-    marginBottom: 12,
-  },
-  
-  // Mensagem de sucesso (verde)
-  mensagem: {
-    backgroundColor: "#E8F5E9",
-    padding: 16,
-    borderRadius: 8,
-    borderLeftWidth: 4,
-    borderLeftColor: "#216523",
-  },
-  
-  // Mensagem de cancelamento (vermelho)
-  mensagemCancelada: {
-    backgroundColor: "#FFEBEE",
-    padding: 16,
-    borderRadius: 8,
-    borderLeftWidth: 4,
-    borderLeftColor: "#802620",
-  },
-  mensagemTexto: {
-    fontSize: 16,
-    color: "#333",
-    fontWeight: "600",
-    textAlign: "center",
-  },
-});;
