@@ -50,7 +50,18 @@ export default function Home() {
     carregarConsulta();
   }, []);
 
-
+  async function carregarConsulta() {
+    try {
+      const consultaSalva = await AsyncStorage.getItem(STORAGE_KEY);
+      if (consultaSalva) {
+        const consultaObjeto = JSON.parse(consultaSalva);
+        consultaObjeto.data = new Date(consultaObjeto.data);
+        setConsulta(consultaObjeto);
+      }
+    } catch (erro) {
+      console.error("Erro ao carregar consulta:", erro);
+    }
+  }
 
   async function salvarConsulta(consultaAtualizada: Consulta) {
     try {
