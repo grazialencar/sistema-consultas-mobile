@@ -52,6 +52,17 @@ export default function Home() {
 
 
 
+  async function salvarConsulta(consultaAtualizada: Consulta) {
+    try {
+      await AsyncStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(consultaAtualizada)
+      );
+    } catch (erro) {
+      console.error("Erro ao salvar consulta:", erro);
+    }
+  }
+
   function confirmarConsulta() {
     const consultaAtualizada = {
       ...consulta,
