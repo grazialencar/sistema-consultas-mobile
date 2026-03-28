@@ -33,7 +33,7 @@ export default function Admin({ navigation }: any) {
   const [crmMed, setCrmMed] = useState("");
   const [medicos, setMedicos] = useState<Medico[]>([]);
 
-  // ========== ESTADOS PARA CONSULTA DE TESTE ==========
+  // ========= ESTADOS PARA CONSULTA DE TESTE =========
   const [nomePac, setNomePac] = useState("");
   const [dataConsulta, setDataConsulta] = useState("");
 
