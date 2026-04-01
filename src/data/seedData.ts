@@ -22,70 +22,70 @@ export const medicosIniciais: Medico[] = [
     id: 1,
     nome: "Dr. Carlos Silva",
     crm: "12345-SP",
-    especialidade: especialidadesIniciais[0], // Cardiologia
+    especialidade: especialidadesIniciais[0],
     ativo: true,
   },
   {
     id: 2,
     nome: "Dra. Ana Costa",
     crm: "23456-SP",
-    especialidade: especialidadesIniciais[1], // Dermatologia
+    especialidade: especialidadesIniciais[1],
     ativo: true,
   },
   {
     id: 3,
     nome: "Dr. Pedro Santos",
     crm: "34567-SP",
-    especialidade: especialidadesIniciais[2], // Ortopedia
+    especialidade: especialidadesIniciais[2],
     ativo: true,
   },
   {
     id: 4,
     nome: "Dra. Maria Oliveira",
     crm: "45678-SP",
-    especialidade: especialidadesIniciais[3], // Pediatria
+    especialidade: especialidadesIniciais[3],
     ativo: true,
   },
   {
     id: 5,
     nome: "Dra. Juliana Mendes",
     crm: "56789-SP",
-    especialidade: especialidadesIniciais[4], // Ginecologia
+    especialidade: especialidadesIniciais[4],
     ativo: true,
   },
   {
     id: 6,
     nome: "Dr. Roberto Lima",
     crm: "67890-SP",
-    especialidade: especialidadesIniciais[5], // Oftalmologia
+    especialidade: especialidadesIniciais[5],
     ativo: true,
   },
   {
     id: 7,
     nome: "Dra. Fernanda Souza",
     crm: "78901-SP",
-    especialidade: especialidadesIniciais[6], // Neurologia
+    especialidade: especialidadesIniciais[6],
     ativo: true,
   },
   {
     id: 8,
     nome: "Dr. Lucas Almeida",
     crm: "89012-SP",
-    especialidade: especialidadesIniciais[7], // Psiquiatria
+    especialidade: especialidadesIniciais[7],
     ativo: true,
   },
   {
     id: 9,
     nome: "Dra. Patricia Rocha",
     crm: "90123-SP",
-    especialidade: especialidadesIniciais[8], // Endocrinologia
+    especialidade: especialidadesIniciais[8],
     ativo: true,
   },
   {
     id: 10,
     nome: "Dr. João Ferreira",
     crm: "01234-SP",
-    especialidade: especialidadesIniciais[9], // Clínica Geral
+    especialidade: especialidadesIniciais[9],
     ativo: true,
   },
 ];
