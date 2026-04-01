@@ -2,12 +2,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Especialidade } from "../types/especialidade";
 import { Medico } from "../interfaces/medico";
 import { Consulta } from "../interfaces/consulta";
+import { Paciente } from "../types/paciente";
 
 // Definição das chaves usadas no AsyncStorage
 const KEYS = {
   ESPECIALIDADES: "@consultas:especialidades",
   MEDICOS: "@consultas:medicos",
   CONSULTAS: "@consultas:consultas",
+  PACIENTE_LOGADO: "@consultas:pacienteLogado",
+  PACIENTES: "@consultas:pacientes",
 };
 
 // ========== ESPECIALIDADES ==========
@@ -70,6 +73,26 @@ export async function obterConsultas(): Promise<Consulta[]> {
     return [];
   } catch (erro) {
     console.error("Erro ao obter:", erro);
+    return [];
+  }
+}
+
+// ========== PACIENTES ==========
+// Salva lista de pacientes
+export async function salvarPacientes(pacientes: Paciente[]) {
+  try {
+    await AsyncStorage.setItem(KEYS.PACIENTES, JSON.stringify(pacientes));
+  } catch (erro) {
+    console.error("Erro ao salvar pacientes:", erro);
+  }
+}
+// Busca lista de pacientes
+export async function obterPacientes(): Promise<Paciente[]> {
+  try {
+    const dados = await AsyncStorage.getItem(KEYS.PACIENTES);
+    return dados ? JSON.parse(dados) : [];
+  } catch (erro) {
+    console.error("Erro ao obter pacientes:", erro);
     return [];
   }
 }
