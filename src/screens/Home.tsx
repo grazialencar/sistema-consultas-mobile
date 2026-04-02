@@ -2,21 +2,20 @@ import React, { useState } from "react";
 import { View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useFocusEffect } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Consulta } from "../interfaces/consulta";
 import { ConsultaCard } from "../components";
 import { styles } from "../styles/app.styles";
 import { 
   obterConsultas, 
   salvarConsultas, 
-  obterPacienteLogado, 
-  removerPacienteLogado 
+  obterPacienteLogado
 } from "../services/storage";
 
 export default function Home({ navigation }: any) {
   const [consultas, setConsultas] = useState<Consulta[]>([]);
   const [nomePaciente, setNomePaciente] = useState("");
 
-  // Carrega dados sempre que a tela ganhar foco
   useFocusEffect(
     React.useCallback(() => {
       carregarDados();
@@ -24,36 +23,28 @@ export default function Home({ navigation }: any) {
   );
 
   async function carregarDados() {
-    // Verifica se há paciente logado
     const paciente = await obterPacienteLogado();
     if (!paciente) {
-      // Se não houver, redireciona para login
-      console.log("Nenhum paciente logado - redirecionando para Login");
       navigation.replace("Login");
       return;
     }
     
     setNomePaciente(paciente.nome);
-    console.log("Paciente logado:", paciente.nome);
     
-    // Carrega consultas do paciente
     const todasConsultas = await obterConsultas();
     const consultasDoPaciente = todasConsultas.filter(
       (c) => c.paciente.id === paciente.id
     );
     setConsultas(consultasDoPaciente);
-    console.log(`Carregadas ${consultasDoPaciente.length} consultas para ${paciente.nome}`);
   }
 
   async function confirmarConsulta(consultaId: number) {
     try {
-      // Atualiza estado local
       const consultasAtualizadas = consultas.map((c) =>
         c.id === consultaId ? { ...c, status: "confirmada" as const } : c
       );
       setConsultas(consultasAtualizadas);
       
-      // Atualiza todas as consultas no storage
       const todasConsultas = await obterConsultas();
       const consultasAtualizadasCompletas = todasConsultas.map((c) =>
         c.id === consultaId ? { ...c, status: "confirmada" as const } : c
@@ -62,7 +53,6 @@ export default function Home({ navigation }: any) {
       
       Alert.alert("Sucesso", "Consulta confirmada com sucesso!");
     } catch (erro) {
-      console.error("Erro ao confirmar consulta:", erro);
       Alert.alert("Erro", "Não foi possível confirmar a consulta");
     }
   }
@@ -77,13 +67,11 @@ export default function Home({ navigation }: any) {
           text: "Sim",
           onPress: async () => {
             try {
-              // Atualiza estado local
               const consultasAtualizadas = consultas.map((c) =>
                 c.id === consultaId ? { ...c, status: "cancelada" as const } : c
               );
               setConsultas(consultasAtualizadas);
               
-              // Atualiza todas as consultas no storage
               const todasConsultas = await obterConsultas();
               const consultasAtualizadasCompletas = todasConsultas.map((c) =>
                 c.id === consultaId ? { ...c, status: "cancelada" as const } : c
@@ -92,7 +80,6 @@ export default function Home({ navigation }: any) {
               
               Alert.alert("Sucesso", "Consulta cancelada com sucesso!");
             } catch (erro) {
-              console.error("Erro ao cancelar consulta:", erro);
               Alert.alert("Erro", "Não foi possível cancelar a consulta");
             }
           },
@@ -102,20 +89,18 @@ export default function Home({ navigation }: any) {
   }
 
   async function handleLogout() {
-    Alert.alert("Sair", "Deseja realmente sair da sua conta?", [
-      { text: "Cancelar", style: "cancel" },
+    Alert.alert("Sair", "Deseja realmente sair?", [
+      { text: "Cancelar" },
       {
         text: "Sair",
-        onPress: async () => {
-          try {
-            console.log("Fazendo logout...");
-            await removerPacienteLogado();
-            console.log("Paciente removido, navegando para Login");
-            navigation.replace("Login");
-          } catch (erro) {
-            console.error("Erro ao fazer logout:", erro);
-            Alert.alert("Erro", "Não foi possível fazer logout");
-          }
+        onPress: () => {
+          AsyncStorage.removeItem("@consultas:pacienteLogado")
+            .then(() => {
+              navigation.replace("Login");
+            })
+            .catch(() => {
+              Alert.alert("Erro", "Não foi possível sair");
+            });
         },
       },
     ]);
@@ -132,7 +117,6 @@ export default function Home({ navigation }: any) {
           </Text>
         </View>
 
-        {/* Botões de ação */}
         <View style={{ marginBottom: 20 }}>
           <TouchableOpacity
             style={{
@@ -162,7 +146,6 @@ export default function Home({ navigation }: any) {
           </TouchableOpacity>
         </View>
 
-        {/* Lista de consultas */}
         {consultas.length === 0 ? (
           <View style={{ 
             backgroundColor: "rgba(255,255,255,0.1)", 
